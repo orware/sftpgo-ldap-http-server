@@ -102,3 +102,65 @@ $default_output_object = array(
     ),
     'public_keys' => array(),
 );
+
+// If you want to have a specific LDAP connection use a different output object template,
+// add in an entry using the connection name as key:
+$connection_output_objects = [];
+
+$connection_output_objects['default'] = [
+    'status' => 1,
+    'username' => '',
+    'expiration_date' => 0,
+    'home_dir' => '',
+    // Need to comment the virtual_folders entry out:
+    //'virtual_folders' => array(
+        //$privateFolderName
+    //),
+    'uid' => 0,
+    'gid' => 0,
+    'max_sessions' => 0,
+    'quota_size' => 0,
+    'quota_files' => 100000,
+    'permissions' => [
+        "/" => ["*"],
+        //"/somedir" => array("list", "download"),
+    ],
+    'upload_bandwidth' => 0,
+    'download_bandwidth' => 0,
+    'filters' => [
+        'allowed_ip' => [],
+        'denied_ip' => [],
+    ],
+    'public_keys' => [],
+];
+
+// If you want to have a specific LDAP username to use a different output object template,
+// add in an entry using the username as key:
+$user_output_objects = [];
+
+$user_output_objects['example_username'] = [
+    'status' => 1,
+    'username' => '',
+    'expiration_date' => 0,
+    'home_dir' => '',
+    // Need to comment the virtual_folders entry out:
+    //'virtual_folders' => array(
+        //$privateFolderName
+    //),
+    'uid' => 0,
+    'gid' => 0,
+    'max_sessions' => 0,
+    'quota_size' => 0,
+    'quota_files' => 100000,
+    'permissions' => [
+        "/" => ["*"],
+        //"/somedir" => array("list", "download"),
+    ],
+    'upload_bandwidth' => 0,
+    'download_bandwidth' => 0,
+    'filters' => [
+        'allowed_ip' => [],
+        'denied_ip' => [],
+    ],
+    'public_keys' => [],
+];
