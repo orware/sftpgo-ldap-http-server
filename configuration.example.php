@@ -15,7 +15,7 @@ $log->pushHandler(new RotatingFileHandler('logs/sftpgo-ldap.log', 30, Logger::DE
 $debug_object = '{"username":"test","password":"test","ip":"::1","keyboard_interactive":"","protocol":"SSH","public_key":""}';
 
 // This is the port the HTTP server will run on:
-$port = '9001';
+$port = 9001;
 
 // Localhost IPs are present, but add remote IP of SFTPGo server into the list below if needed:
 $allowed_ips = [
