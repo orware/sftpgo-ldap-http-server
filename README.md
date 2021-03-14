@@ -12,6 +12,10 @@ The main reason for creating this alternative option is because, I had observed 
 
 However, I wanted to somehow bring in a simple HTTP server that also allowed me to use most of the existing PHP code I had created and the existing PHP libaries I'm using (in particular, the LdapRecord library for PHP is pretty awesome, so it helps simplify the LDAP interactions), so that's where `amphp/http-server` came into the picture (along with ExeOutput for PHP to help with creating a binary afterwards to simplify things even further).
 
+Right now, the intention of this HTTP server is not to be publicly accessible (I have no idea if it would run well in that situation or if it would run into issues), but at the very least since I didn't build-in any sort of HTTPS support, if you did want to do that you would need to use a reverse proxy in front of it to provide HTTPS support.
+
+Instead, the intention of this HTTP server is for it to run locally on the server you are also running SFTPGo on, and the port being used by this project should be behind a firewall so that only local requests can access the endpoint.
+
 ### Quick Instructions (this is only if you want to setup PHP separately on your server and clone the repository):
 
 NOTE: You will need to run this code via something like: `php index.php` at the command line on your computer/server.
