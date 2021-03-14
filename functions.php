@@ -27,7 +27,7 @@ function authenticateUser($data) {
     if (!empty($data)) {
 
         try {
-            global $connections;
+            global $connections, $domains_to_strip_automatically;
 
             foreach($connections as $connectionName => $connection) {
 
@@ -39,6 +39,15 @@ function authenticateUser($data) {
                 $baseDn = $configuration->get('base_dn');
 
                 $organizationalUnit = $baseDn;
+
+                // Strip specific organization email domains if provided:
+                if (isset($domains_to_strip_automatically)) {
+                    foreach($domains_to_strip_automatically as $domain) {
+                        $domain = '@'.str_replace('@', '', $domain);
+                        logMessage('Attempting to strip ' . $domain . ' from provided username.');
+                        $data['username'] = str_replace($domain, '', $data['username']);
+                    }
+                }
 
                 $user = $connection->query()
                     ->in($organizationalUnit)
