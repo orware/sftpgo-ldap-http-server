@@ -1,0 +1,9 @@
+{
+    "require": {
+        "amphp/http-server": "^2.1",
+        "directorytree/ldaprecord": "^2.2",
+        "monolog/monolog": "^2.2",
+        "amphp/log": "^1.1",
+        "amphp/http-server-form-parser": "^1.1"
+    }
+}
