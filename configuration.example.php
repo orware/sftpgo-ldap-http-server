@@ -76,7 +76,7 @@ $virtual_folders['example'] = [
 ];
 
 // You can make adjustments here that will be used for all of your user object responses back to SFTPGo:
-$default_output_object = array(
+$default_output_object = [
     'status' => 1,
     'username' => '',
     'expiration_date' => 0,
@@ -90,18 +90,18 @@ $default_output_object = array(
     'max_sessions' => 0,
     'quota_size' => 0,
     'quota_files' => 100000,
-    'permissions' => array(
-        "/" => array("*"),
+    'permissions' => [
+        "/" => ["*"],
         //"/somedir" => array("list", "download"),
-    ),
+    ],
     'upload_bandwidth' => 0,
     'download_bandwidth' => 0,
-    'filters' => array(
-        'allowed_ip' => array(),
-        'denied_ip' => array(),
-    ),
-    'public_keys' => array(),
-);
+    'filters' => [
+        'allowed_ip' => [],
+        'denied_ip' => [],
+    ],
+    'public_keys' => [],
+];
 
 // If you want to have a specific LDAP connection use a different output object template,
 // add in an entry using the connection name as key:
