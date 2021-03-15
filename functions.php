@@ -31,6 +31,7 @@ function authenticateUser($data) {
 
             // Strip specific organization email domains if provided:
             if (isset($domains_to_strip_automatically)) {
+                logMessage('Username before domain stripping: ' . $data['username']);
                 foreach($domains_to_strip_automatically as $domain) {
                     $domain = '@'.str_replace('@', '', $domain);
                     logMessage('Attempting to strip ' . $domain . ' from provided username.');
@@ -41,7 +42,7 @@ function authenticateUser($data) {
             foreach($connections as $connectionName => $connection) {
 
                 logMessage('Before connection attempt to ' . $connectionName);
-                $connection->connect();
+                $connection->reconnect();
                 logMessage('After connection attempt to ' . $connectionName);
 
                 $configuration = $connection->getConfiguration();
@@ -65,12 +66,21 @@ function authenticateUser($data) {
                         // User has been successfully authenticated.
                         logMessage('After authentication attempt for: ' . $data['username'] . ' (success!)');
                         $output = createResponseObject($connectionName, $data['username']);
+
+                        logMessage('Disconnecting from ' . $connectionName);
+                        $connection->disconnect();
                         return createResponse($output);
                     } else {
                         // Username or password is incorrect.
                         logMessage('After authentication attempt for: ' . $data['username'] . ' (failed!)');
+
+                        logMessage('Disconnecting from ' . $connectionName);
+                        $connection->disconnect();
                         return denyRequest();
                     }
+                } else {
+                   logMessage('Disconnecting from ' . $connectionName);
+                   $connection->disconnect();
                 }
 
                 logMessage('User lookup failed for: ' . $data['username']);
@@ -79,6 +89,7 @@ function authenticateUser($data) {
         } catch (\LdapRecord\Auth\BindException $e) {
             $error = $e->getDetailedError();
 
+            logMessage($error->getErrorMessage());
             //echo $error->getErrorCode();
             //echo $error->getErrorMessage();
             //echo $error->getDiagnosticMessage();
