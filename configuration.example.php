@@ -191,6 +191,14 @@ $auto_groups_mode_virtual_folder_template = [
     ]
 ];
 
+// Used only when auto groups mode is enabled and will help prevent all your groups from being
+// added into SFTPGo since only groups with the prefixes defined here will be automatically added
+// with prefixes automatically removed when listed as a virtual folder (e.g. a group with name
+// "sftpgo-example" would simply become "example").
+$allowed_group_prefixes = [
+    'sftpgo-'
+];
+
 // List of groups where a virtual folder will be created and associated with any group members:
 $allowed_groups = [];
 
